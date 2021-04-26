@@ -1,3 +1,4 @@
+import { SubscribeButton } from '../SubscribeButton';
 import styles from './styles.module.scss';
 
 export const Home = () => {
@@ -12,6 +13,7 @@ export const Home = () => {
           Get access to tall the publications <br />
           <span>for $9.90 month</span>
         </p>
+        <SubscribeButton />
       </section>
       <img src="/images/avatar.svg" alt="Girl coding" />
     </main>

@@ -6,7 +6,7 @@ export const SignInButton = () => {
   const isUserLogged = true;
 
   return (
-    <button className={styles.signInButton}>
+    <button type="button" className={styles.signInButton}>
       <FaGithub color={isUserLogged ? '#04d361' : '#eba417'} />
       {isUserLogged ? 'Pedro Leinar' : 'Sing in with GitHub'}
       {isUserLogged && <FiX color="#737380" className={styles.closeIcon} />}
