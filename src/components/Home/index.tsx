@@ -1,7 +1,17 @@
 import { SubscribeButton } from '../SubscribeButton';
 import styles from './styles.module.scss';
 
-export const Home = () => {
+type Product = {
+  product: {
+    priceId: string;
+    amount: number;
+  };
+};
+
+const numberFormatter = (number: number) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
+
+export const Home = ({ product }: Product) => {
   return (
     <main className={styles.contentContainer}>
       <section className={styles.hero}>
@@ -10,8 +20,8 @@ export const Home = () => {
           News about the <span>React</span> world.
         </h1>
         <p>
-          Get access to tall the publications <br />
-          <span>for $9.90 month</span>
+          Get access to all the publications <br />
+          <span>for {numberFormatter(product.amount)} month</span>
         </p>
         <SubscribeButton />
       </section>
