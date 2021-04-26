@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { Home } from '../components/Home';
 import { stripe } from '../services/stripe';
 
@@ -10,18 +10,18 @@ type Product = {
   };
 };
 
-export default function Index(props: Product) {
+export default function Index({ product }: Product) {
   return (
     <>
       <Head>
         <title>Home | ig.news</title>
       </Head>
-      <Home product={props.product} />
+      <Home product={product} />
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve('price_1IkQgEFvv4fIhzAZVcEe8IM2', {
     expand: ['product'],
   });
@@ -35,5 +35,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       product,
     },
+    revalidate: 60 * 60 * 24, // 24 hours
   };
 };
