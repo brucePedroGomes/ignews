@@ -1,12 +1,13 @@
 import Head from 'next/head';
+import { Home } from '../components/Home';
 
-export default function Home() {
+export default function Index() {
   return (
     <>
       <Head>
         <title>Home | ig.news</title>
       </Head>
-      <h1>Hello world</h1>
+      <Home />
     </>
   );
 }
