@@ -12,9 +12,6 @@ export default NextAuth({
       scope: 'read:user',
     }),
   ],
-  // jwt: {
-  //   signingKey: process.env.SIGNING_KEY,
-  // },
   callbacks: {
     async signIn(user, _account, _profile) {
       try {
@@ -26,16 +23,28 @@ export default NextAuth({
                 q.Casefold(user.email)
               )
             ),
-            q.Get(
-              q.Match(
-                q.Index('user_by_email'),
-                q.Casefold(user.email)
-              )
+            q.Update(
+              q.Select(
+                ['ref'],
+                q.Get(
+                  q.Match(
+                    q.Index('user_by_email'),
+                    q.Casefold(user.email)
+                  )
+                )
+              ),
+              {
+                data: {
+                  name: user.name,
+                  image: user.image,
+                },
+              }
             ),
             q.Create(q.Collection('users'), {
               data: {
                 email: user.email,
                 name: user.name,
+                image: user.image,
               },
             })
           )
