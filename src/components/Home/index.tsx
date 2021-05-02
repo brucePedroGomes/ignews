@@ -8,9 +8,6 @@ type Product = {
   };
 };
 
-const numberFormatter = (number: number) =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
-
 export const Home = ({ product }: Product) => {
   return (
     <main className={styles.contentContainer}>
@@ -21,7 +18,7 @@ export const Home = ({ product }: Product) => {
         </h1>
         <p>
           Get access to all the publications <br />
-          <span>for {numberFormatter(product.amount)} month</span>
+          <span>for {product.amount} month</span>
         </p>
         <SubscribeButton priceId={product.priceId} />
       </section>

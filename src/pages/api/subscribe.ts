@@ -55,14 +55,14 @@ export default async (
         billing_address_collection: 'required',
         line_items: [
           {
-            price: 'price_1IkQgEFvv4fIhzAZVcEe8IM2',
+            price: process.env.SUBSCRIPTION_PRICE,
             quantity: 1,
           },
         ],
         mode: 'subscription',
         allow_promotion_codes: true,
-        success_url: `${process.env.STRIPE_URL}/posts`,
-        cancel_url: process.env.STRIPE_URL,
+        success_url: `${process.env.URL}/posts`,
+        cancel_url: process.env.URL,
       }
     );
 
