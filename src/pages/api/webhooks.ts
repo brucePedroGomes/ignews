@@ -69,6 +69,7 @@ export default async (
             customerId: subscription.customer.toString(),
           });
 
+          res.status(200);
           break;
         case 'checkout.session.completed':
           const checkoutSession = event.data
@@ -79,10 +80,11 @@ export default async (
             customerId: checkoutSession.customer.toString(),
           });
 
+          res.status(200);
           break;
         default:
           res.status(200);
-          return;
+          break;
       }
     }
 

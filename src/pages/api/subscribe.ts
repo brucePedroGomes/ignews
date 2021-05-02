@@ -66,8 +66,9 @@ export default async (
       }
     );
 
-    res.status(200).json({ sessionId: stripeCheckout.id });
-    return;
+    return res
+      .status(200)
+      .json({ sessionId: stripeCheckout.id });
   }
 
   res.setHeader('Allow', 'POST');
