@@ -81,6 +81,7 @@ export default async (
 
           break;
         default:
+          res.status(200);
           return;
       }
     }

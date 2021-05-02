@@ -46,6 +46,7 @@ export const saveSubscription = async ({
         {
           data: {
             status: subscription.status,
+            updated_at: new Date().toString(),
           },
         }
       ),
@@ -55,6 +56,7 @@ export const saveSubscription = async ({
           user_id: userRef,
           status: subscription.status,
           price_id: subscription.items.data[0].price.id,
+          created_at: new Date().toString(),
         },
       })
     )
