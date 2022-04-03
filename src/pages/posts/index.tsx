@@ -1,11 +1,11 @@
-import { GetStaticProps } from 'next';
-import { getPrimiscClient } from '../../services/prismic';
-import Prismic from '@prismicio/client';
-import { RichText } from 'prismic-dom';
-import { dateFormatter } from '../../services/utils';
-import Head from 'next/head';
-import styles from './styles.module.scss';
-import Link from 'next/link';
+import { GetStaticProps } from "next";
+import { getPrismicClient } from "../../services/prismic";
+import Prismic from "@prismicio/client";
+import { RichText } from "prismic-dom";
+import { dateFormatter } from "../../services/utils";
+import Head from "next/head";
+import styles from "./styles.module.scss";
+import Link from "next/link";
 
 type Props = {
   posts: {
@@ -42,10 +42,10 @@ const Posts = ({ posts }: Props) => {
 export default Posts;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prismic = getPrimiscClient();
+  const prismic = getPrismicClient();
 
   const response = await prismic.query(
-    [Prismic.predicates.at('document.type', 'publication')],
+    [Prismic.predicates.at("document.type", "publication")],
     {
       pageSize: 20,
     }
@@ -57,9 +57,8 @@ export const getStaticProps: GetStaticProps = async () => {
     excerpt:
       post.data.content.find(
         (content: any) =>
-          content.type === 'paragraph' &&
-          content.text.length > 0
-      )?.text ?? '',
+          content.type === "paragraph" && content.text.length > 0
+      )?.text ?? "",
     updated_at: dateFormatter(post.last_publication_date),
   }));
 

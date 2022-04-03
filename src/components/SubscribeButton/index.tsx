@@ -1,29 +1,27 @@
-import { signIn, useSession } from 'next-auth/client';
-import { useRouter } from 'next/dist/client/router';
-import { api } from '../../services/api';
-import { getStripeJs } from '../../services/stripe-js';
-import styles from './styles.module.scss';
+import { signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/dist/client/router";
+import { api } from "../../services/api";
+import { getStripeJs } from "../../services/stripe-js";
+import styles from "./styles.module.scss";
 
-export const SubscribeButton = (props: {
-  priceId: string;
-}) => {
+export const SubscribeButton = (props: { priceId: string }) => {
   const [session] = useSession();
   const { push } = useRouter();
 
-  const handleSubcribe = async () => {
+  const handleSubscribe = async () => {
     if (!session) {
-      signIn('github');
+      signIn("github");
       return;
     }
 
     if (session?.activeSubscription) {
-      push('/posts');
+      push("/posts");
     }
 
     try {
       const response = await api.post<{
         sessionId: string;
-      }>('/subscribe');
+      }>("/subscribe");
 
       const stripe = await getStripeJs();
 
@@ -39,7 +37,7 @@ export const SubscribeButton = (props: {
     <button
       type="button"
       className={styles.subscribeButton}
-      onClick={handleSubcribe}
+      onClick={handleSubscribe}
     >
       Subscribe now
     </button>
